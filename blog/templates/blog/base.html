@@ -1,0 +1,73 @@
+{% load static %}
+
+
+
+<html>
+    <head>
+        <title>Blog Django</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blogdesign.css' %}">
+        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+    </head>
+    <body>
+
+
+
+
+    <div class="page-header">
+
+    <h1><a href="/">Blog Django</a></h1>
+</div>
+
+
+<!-- Load an icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="navbar">
+  <a class="active" href="/"><i class="fa fa-fw fa-home"></i> Home</a>
+    {% if user.is_authenticated %}
+
+    <a href="{% url 'logout' %}" > <i class="fa fa-sign-out"></i> Log out</a>
+
+    {% else %}
+
+    <a href="{% url 'login' %}"><i class="fa fa-fw fa-user"></i> Login</a>
+
+    {% endif %}
+
+
+</div>
+
+    <div class="intro">
+{% if user.is_authenticated %}
+
+
+        <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span>My Drafts Posts</a>
+        <a href="{% url 'post_new' %}" class="top-menu"><span class="fa fa-plus-square"></span> Add New Post</a>
+        <p class="top-menu">Welcome {{user.username }}</p>
+
+
+    {% endif %}
+
+    </div>
+
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+
+    </div>
+</div>
+
+
+    </body>
+</html>
